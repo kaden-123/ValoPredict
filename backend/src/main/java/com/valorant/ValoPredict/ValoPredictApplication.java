@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ValoPredictApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ValoPredictApplication.class, args);
+        SpringApplication.run(ValoPredictApplication.class, args);
 	}
 
 }
