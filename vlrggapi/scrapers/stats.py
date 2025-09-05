@@ -1,11 +1,14 @@
 import requests
+import json
 from selectolax.parser import HTMLParser
 
 from utils.utils import headers
 
 
-def vlr_stats(region: str, timespan: str):
-    base_url = f"https://www.vlr.gg/stats/?event_group_id=all&event_id=all&region={region}&country=all&min_rounds=200&min_rating=1550&agent=all&map_id=all"
+def vlr_stats(region: str, timespan: str, rating: str, rounds: str, agent: str, map: str)
+    #change min rating and rounds?
+    #convert map to numerical ids
+    base_url = f"https://www.vlr.gg/stats/?event_group_id=all&event_id=all&region={region}&country=all&min_rounds={rounds}&min_rating={rating}&agent={agent}&map_id={map}"
     url = (
         f"{base_url}&timespan=all"
         if timespan.lower() == "all"
@@ -15,6 +18,9 @@ def vlr_stats(region: str, timespan: str):
     resp = requests.get(url, headers=headers)
     html = HTMLParser(resp.text)
     status = resp.status_code
+
+    if(status != 200):
+        raise Exception(f"Requests Status Code is: {status}")
 
     result = []
     for item in html.css("tbody tr"):
@@ -49,9 +55,4 @@ def vlr_stats(region: str, timespan: str):
             }
         )
 
-    segments = {"status": status, "segments": result}
-    data = {"data": segments}
-
-    if status != 200:
-        raise Exception("API response: {}".format(status))
-    return data
+    return result
