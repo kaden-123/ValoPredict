@@ -1,5 +1,6 @@
 package com.valorant.ValoPredict.player;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -76,5 +77,10 @@ public class PlayerService {
             return playerToUpdate;
         }
         return null;
+    }
+
+    @Transactional
+    public void deletePlayer(Integer id){
+        playerRepository.deleteById(id);
     }
 }
