@@ -11,6 +11,7 @@ public class Player {
     @Id
     private int id;
 
+    @Column(name="player_name")
     private String name;
 
     private String org;
