@@ -1,57 +1,56 @@
 package com.valorant.ValoPredict.player;
 
+import io.hypersistence.utils.hibernate.type.array.StringArrayType;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="valo_statistics")
 public class Player {
 
     @Id
-    private int id;
+    private Integer id;
 
     @Column(name="player_name")
     private String name;
 
     private String org;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "player_agents",
-            joinColumns = @JoinColumn(name="player_id")
-    )
-    @Column(name="agent")
-    private List<String> agents;
+    @Type(StringArrayType.class)
+    @Column(name="agents", columnDefinition="text[]")
+    private String[] agents;
 
-    private int rounds_played;
+    private Integer rounds_played;
 
-    private double rating;
+    private Double rating;
 
-    private double acs;
+    private Double acs;
 
-    private double kd;
+    private Double kd;
 
-    private int kast;
+    private Integer kast;
 
-    private double adr;
+    private Double adr;
 
-    private double kpr;
+    private Double kpr;
 
-    private double apr;
+    private Double apr;
 
-    private double fkpr;
+    private Double fkpr;
 
-    private double fdpr;
+    private Double fdpr;
 
-    private int hs_percentage;
+    private Integer hs_percentage;
 
-    private int clutch_success_percentage;
+    private Integer clutch_success_percentage;
 
     public Player() {
     }
 
-    public Player(int id, String name, String org, List<String> agents, int rounds_played, double rating, double acs, double kd, int kast, double adr, double kpr, double apr, double fkpr, double fdpr, int hs_percentage, int clutch_success_percentage) {
+    public Player(Integer id, String name, String org, String[] agents, Integer rounds_played, Double rating, Double acs, Double kd, Integer kast, Double adr, Double kpr, Double apr, Double fkpr, Double fdpr, Integer hs_percentage, Integer clutch_success_percentage) {
         this.id = id;
         this.name = name;
         this.org = org;
@@ -70,11 +69,11 @@ public class Player {
         this.clutch_success_percentage = clutch_success_percentage;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -94,107 +93,107 @@ public class Player {
         this.org = org;
     }
 
-    public List<String> getAgents() {
+    public String[] getAgents() {
         return agents;
     }
 
-    public void setAgents(List<String> agents) {
+    public void setAgents(String[] agents) {
         this.agents = agents;
     }
 
-    public int getRounds_played() {
+    public Integer getRounds_played() {
         return rounds_played;
     }
 
-    public void setRounds_played(int rounds_played) {
+    public void setRounds_played(Integer rounds_played) {
         this.rounds_played = rounds_played;
     }
 
-    public double getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
-    public double getAcs() {
+    public Double getAcs() {
         return acs;
     }
 
-    public void setAcs(double acs) {
+    public void setAcs(Double acs) {
         this.acs = acs;
     }
 
-    public double getKd() {
+    public Double getKd() {
         return kd;
     }
 
-    public void setKd(double kd) {
+    public void setKd(Double kd) {
         this.kd = kd;
     }
 
-    public int getKast() {
+    public Integer getKast() {
         return kast;
     }
 
-    public void setKast(int kast) {
+    public void setKast(Integer kast) {
         this.kast = kast;
     }
 
-    public double getAdr() {
+    public Double getAdr() {
         return adr;
     }
 
-    public void setAdr(double adr) {
+    public void setAdr(Double adr) {
         this.adr = adr;
     }
 
-    public double getKpr() {
+    public Double getKpr() {
         return kpr;
     }
 
-    public void setKpr(double kpr) {
+    public void setKpr(Double kpr) {
         this.kpr = kpr;
     }
 
-    public double getApr() {
+    public Double getApr() {
         return apr;
     }
 
-    public void setApr(double apr) {
+    public void setApr(Double apr) {
         this.apr = apr;
     }
 
-    public double getFkpr() {
+    public Double getFkpr() {
         return fkpr;
     }
 
-    public void setFkpr(double fkpr) {
+    public void setFkpr(Double fkpr) {
         this.fkpr = fkpr;
     }
 
-    public double getFdpr() {
+    public Double getFdpr() {
         return fdpr;
     }
 
-    public void setFdpr(double fdpr) {
+    public void setFdpr(Double fdpr) {
         this.fdpr = fdpr;
     }
 
-    public int getHs_percentage() {
+    public Integer getHs_percentage() {
         return hs_percentage;
     }
 
-    public void setHs_percentage(int hs_percentage) {
+    public void setHs_percentage(Integer hs_percentage) {
         this.hs_percentage = hs_percentage;
     }
 
-    public int getClutch_success_percentage() {
+    public Integer getClutch_success_percentage() {
         return clutch_success_percentage;
     }
 
-    public void setClutch_success_percentage(int clutch_success_percentage) {
+    public void setClutch_success_percentage(Integer clutch_success_percentage) {
         this.clutch_success_percentage = clutch_success_percentage;
     }
 }
