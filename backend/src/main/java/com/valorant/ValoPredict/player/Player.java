@@ -4,9 +4,6 @@ import io.hypersistence.utils.hibernate.type.array.StringArrayType;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Table(name="valo_statistics")
 public class Player {
