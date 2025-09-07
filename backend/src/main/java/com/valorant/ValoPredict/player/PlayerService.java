@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,14 +37,14 @@ public class PlayerService {
 
     public List<Player> getPlayersByAgent(String searchText){
         return playerRepository.findAll().stream()
-                .filter(player -> player.getAgents().stream()
+                .filter(player -> Arrays.stream(player.getAgents())
                         .anyMatch(agent -> agent.equalsIgnoreCase(searchText)))
                 .collect(Collectors.toList());
     }
 
     public List<Player> getPlayersByOrgAndAgent(String org, String agentName){
         return playerRepository.findAll().stream()
-                .filter(player -> player.getOrg().equalsIgnoreCase(org) && player.getAgents().stream().anyMatch(agent -> agent.equalsIgnoreCase(agentName)))
+                .filter(player -> player.getOrg().equalsIgnoreCase(org) && Arrays.stream(player.getAgents()).anyMatch(agent -> agent.equalsIgnoreCase(agentName)))
                 .collect(Collectors.toList());
     }
 
