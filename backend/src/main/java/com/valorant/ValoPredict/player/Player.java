@@ -1,24 +1,20 @@
 package com.valorant.ValoPredict.player;
 
-import io.hypersistence.utils.hibernate.type.array.StringArrayType;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name="valo_statistics")
+@Table(name="valo_stats")
 public class Player {
 
     @Id
     private Integer id;
 
-    @Column(name="player_name")
+    @Column(name="player")
     private String name;
 
     private String org;
 
-    @Type(StringArrayType.class)
-    @Column(name="agents", columnDefinition="text[]")
-    private String[] agents;
+    private String agents;
 
     private Integer rounds_played;
 
@@ -47,7 +43,7 @@ public class Player {
     public Player() {
     }
 
-    public Player(Integer id, String name, String org, String[] agents, Integer rounds_played, Double rating, Double acs, Double kd, Integer kast, Double adr, Double kpr, Double apr, Double fkpr, Double fdpr, Integer hs_percentage, Integer clutch_success_percentage) {
+    public Player(Integer id, String name, String org, String agents, Integer rounds_played, Double rating, Double acs, Double kd, Integer kast, Double adr, Double kpr, Double apr, Double fkpr, Double fdpr, Integer hs_percentage, Integer clutch_success_percentage) {
         this.id = id;
         this.name = name;
         this.org = org;
@@ -90,11 +86,11 @@ public class Player {
         this.org = org;
     }
 
-    public String[] getAgents() {
+    public String getAgents() {
         return agents;
     }
 
-    public void setAgents(String[] agents) {
+    public void setAgents(String agents) {
         this.agents = agents;
     }
 
