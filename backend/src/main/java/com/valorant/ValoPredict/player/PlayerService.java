@@ -37,14 +37,14 @@ public class PlayerService {
 
     public List<Player> getPlayersByAgent(String searchText){
         return playerRepository.findAll().stream()
-                .filter(player -> Arrays.stream(player.getAgents())
+                .filter(player -> Arrays.stream(player.getAgents().split(", "))
                         .anyMatch(agent -> agent.equalsIgnoreCase(searchText)))
                 .collect(Collectors.toList());
     }
 
     public List<Player> getPlayersByOrgAndAgent(String org, String agentName){
         return playerRepository.findAll().stream()
-                .filter(player -> player.getOrg().equalsIgnoreCase(org) && Arrays.stream(player.getAgents()).anyMatch(agent -> agent.equalsIgnoreCase(agentName)))
+                .filter(player -> player.getOrg().equalsIgnoreCase(org) && Arrays.stream(player.getAgents().split(", ")).anyMatch(agent -> agent.equalsIgnoreCase(agentName)))
                 .collect(Collectors.toList());
     }
 
