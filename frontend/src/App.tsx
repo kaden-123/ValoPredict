@@ -8,31 +8,46 @@ import History from "./components/player/History";
 import Stats from "./components/player/Stats";
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        Component: Template,
+  {
+    path: "/",
+    Component: Template,
+    children: [
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: "players",
+        lazy: async () => {
+          const [Component, loader] = await Promise.all([
+            import("./pages/PlayerList"),
+            import ("./pages/PlayerListLoader"),
+          ]);
+          return { Component, loader};
+        },
         children: [
-            {index: true, Component: Home,},
-            {
-                path: "/player/:player_id",
-                //idk why vscode says error here but praying to god it works
-                lazy: async () => {
-                    const [Component, loader] = await Promise.all([
-                        import("./pages/Player"),
-                        import("./components/player/loader"),
-                    ]);
-                    return { Component, loader };
-                },
-
-                children: [
-                    {index: true, Component: Stats},
-                    {path: "history", Component: History },
-                ]
+          {
+            path: "player/:player_id",
+            //idk why vscode says error here but praying to god it works
+            lazy: async () => {
+              const [Component, loader] = await Promise.all([
+                import("./pages/Player"),
+                import("./components/player/loader"),
+              ]);
+              return { Component, loader };
             },
-            {path: "*", Component: NotFound,},
+            children: [
+              { index: true, Component: Stats },
+              { path: "history", Component: History },
+            ]
+          },
+          { path: "*", Component: NotFound }
         ]
-    }
-])
+      }
+    ]
+  }
+]);
+
 
 
 function App() {
