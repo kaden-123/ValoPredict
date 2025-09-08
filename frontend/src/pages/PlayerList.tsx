@@ -1,5 +1,4 @@
-
-function Home() {
+function PlayerList() {
     return (
         <>
           <div>
@@ -9,4 +8,4 @@ function Home() {
     )
 }
 
-export default Home;
+export default PlayerList;
