@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/player")
+@RequestMapping("/playerSearch")
 public class PlayerController {
 
     private final PlayerService playerService;
@@ -20,9 +20,9 @@ public class PlayerController {
 
     @GetMapping
     public List<Player> getPlayers(
-            @RequestParam(required=false) String org,
-            @RequestParam(required=false) String name,
-            @RequestParam(required=false) String agent){
+            @RequestParam(required = false) String org,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String agent){
         if(org != null && agent != null){
             return playerService.getPlayersByOrgAndAgent(org, agent);
         }
